@@ -1,0 +1,90 @@
+spring:
+  application:
+    name: orchestrator
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+        initialize-schema: always
+    properties:
+      org:
+        quartz:
+          jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            instanceName: OrchestratorScheduler_1
+            instanceId: AUTO
+
+org:
+  quartz:
+    scheduler:
+      instanceName: OrchestratorScheduler_1
+      instanceId: AUTO
+    threadPool:
+      class: org.quartz.simpl.SimpleThreadPool
+      threadCount: 10
+      threadPriority: 5
+    jobStore:
+        class: org.quartz.impl.jdbcjobstore.JobStoreTX
+        driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+        useProperties: false
+        dataSource: quartzDataSource
+        tablePrefix: QRTZ_
+        isClustered: true
+        clusterCheckinInterval: 20000
+    dataSource:
+      quartzDataSource:
+        driver: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/test
+        user: postgres
+        password: sourabh
+        maxConnections: 10
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        batch: DEBUG
+      quartz: DEBUG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
